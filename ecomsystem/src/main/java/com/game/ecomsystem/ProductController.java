@@ -1,7 +1,5 @@
 package com.game.ecomsystem;
 
-
-
 import java.util.List;
 import java.util.Optional;
 
@@ -20,27 +18,27 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProductController {
 
 	@Autowired
-	private productrepo repo;
+	private ProductRepository repo;
 	
 	@PostMapping
-	public product create(@RequestBody product product) {
+	public Product create(@RequestBody Product product) {
 		product.setId(null);
-		product savedProduct = repo.save(product);		
+		Product savedProduct = repo.save(product);		
 		return savedProduct;
 	}
 	@GetMapping
-	public List<product> findAll() {
-		List<product> products = repo.findAll();
+	public List<Product> findAll() {
+		List<Product> products = repo.findAll();
 		return products;
 	}
 	@GetMapping(path="/{id}")
-	public product findById(@PathVariable String id) {
-		product product = repo.findById(id).get();
+	public Product findById(@PathVariable String id) {
+		Product product = repo.findById(id).get();
 		return product;
 	}
 	@PutMapping(path="/{id}")
-	public product update(@PathVariable String id, @RequestBody product product) {
-		product oldProduct = repo.findById(id).get();
+	public Product update(@PathVariable String id, @RequestBody Product product) {
+		Product oldProduct = repo.findById(id).get();
 		oldProduct.setName(product.getName());
 		oldProduct.setDescription(product.getDescription());
 		oldProduct.setCategory(product.getCategory());
@@ -48,12 +46,12 @@ public class ProductController {
 		oldProduct.setStock(product.getStock());
 		oldProduct.setPrice(product.getPrice());
 		//
-		product updatedProduct = repo.save(oldProduct);
+		Product updatedProduct = repo.save(oldProduct);
 		return updatedProduct;
 	}
 	@DeleteMapping(path="{id}")
 	public boolean delete(@PathVariable String id) { 
-		Optional<product> optionalProduct = repo.findById(id);
+		Optional<Product> optionalProduct = repo.findById(id);
 		if(optionalProduct.isEmpty()) {
 			return false;
 		}
