@@ -6,6 +6,15 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "products")
 public class Product {
+	public Product(String id,String name,String description,String category,String tags,float price,int stock) {
+		this.id=id;
+		this.name=name;
+		this.description=description;
+		this.category=category;
+		this.tags=tags;
+		this.price=price;
+		this.stock=stock;
+	}
 	
 	@Id
 	private String id;
@@ -77,6 +86,5 @@ public class Product {
 	public void setStock(int stock) {
 		this.stock = stock;
 	}
-    
     
 }
